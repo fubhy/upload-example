@@ -3,7 +3,6 @@ import Section from '../components/section'
 import UploadFile from '../components/upload-file'
 import UploadFileList from '../components/upload-filelist'
 import UploadBlob from '../components/upload-blob'
-import Uploads from '../components/uploads'
 import withData from '../providers/with-data'
 
 const HomePage = () => (
@@ -22,9 +21,6 @@ const HomePage = () => (
     </Section>
     <Section heading="Upload Blob">
       <UploadBlob />
-    </Section>
-    <Section heading="Uploads">
-      <Uploads />
     </Section>
   </Page>
 )

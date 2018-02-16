@@ -12,6 +12,7 @@ const ssrMode = !process.browser
 // To share an instance between pages on the client
 let apolloClient
 
+console.log(process.env.API_URI);
 /**
  * Creates a new Apollo Client instance.
  * @param {Object} [initialState] - Redux initial state.
@@ -21,7 +22,7 @@ const createApolloClient = (initialState = {}) =>
   new ApolloClient({
     ssrMode,
     cache: new InMemoryCache().restore(initialState),
-    link: createUploadLink({ uri: process.env.API_URI })
+    link: createUploadLink({ uri: `${process.env.API_URI}?XDEBUG_SESSION_START=PHPSTORM` })
   })
 
 export default ComposedComponent =>

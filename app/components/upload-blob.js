@@ -2,7 +2,6 @@ import { Component } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Field from './field'
-import uploadsQuery from '../queries/uploads'
 
 class UploadBlob extends Component {
   state = {
@@ -21,10 +20,8 @@ class UploadBlob extends Component {
 
     this.props.mutate({
       variables: { file },
-      update: (proxy, { data: { singleUpload } }) => {
-        const data = proxy.readQuery({ query: uploadsQuery })
-        data.uploads.push(singleUpload)
-        proxy.writeQuery({ query: uploadsQuery, data })
+      update: (proxy, { data: { fileUpload } }) => {
+        console.log(fileUpload);
       }
     })
   }
@@ -59,12 +56,12 @@ class UploadBlob extends Component {
 
 export default graphql(gql`
   mutation($file: Upload!) {
-    singleUpload(file: $file) {
-      id
-      filename
-      encoding
-      mimetype
-      path
+    fileUpload(file: $file) {
+      entity {
+        ... on File {
+          url
+        }
+      }
     }
   }
 `)(UploadBlob)
